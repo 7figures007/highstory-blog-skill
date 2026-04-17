@@ -1,18 +1,37 @@
 ---
-name: highstory-blog-automation
-description: Automates the integration of multilingual blog articles into a HighStory-style Astro application (syncs 16 languages, handles FAQs, JSON-LD, and smart scheduling).
+name: highstory-social-manager
+description: Transforms Claude into an autonomous Social Media Orchestrator using the High Story ecosystem to manage multilingual publication calendars across Instagram, LinkedIn, and Facebook via MCP.
 ---
 
-# HighStory Blog Automation
+# High Story Social Media Orchestrator
 
-Ce skill permet à un agent d'automatiser l'intégration massive d'articles de blog générés (par exemple par Claude ou d'autres flux) dans le fichier `articles.json` d'un projet Astro HighStory.
+This skill transforms Claude into an autonomous Social Media Orchestrator using the High Story ecosystem. It provides the strategic framework and tool-use instructions needed to manage multilingual publication calendars across Instagram, LinkedIn, and Facebook via MCP.
+
+## Capabilities
+
+Connects Claude to the **High Story MCP Server** to enable:
+- **execute_campaign**: Transform high-level briefs into full cross-platform strategies.
+- **publish_post**: Push visual and text content directly to social networks.
+- **get_workspace_stats**: Perform real-time performance audits of your brands.
 
 ## Capacités
 
 1. **Mapping Multilingue** : Gère les 16 langues supportées par High Story (FR, EN, ES, DE, IT, PT, NL, SV, JA, PL, TR, RU, VI, ZH-CN, AR-MA, RO).
 2. **Design HighStory** : Convertit le Markdown en HTML premium et injecte automatiquement les sections FAQ dans des blocs `<div class="callout callout-info">`.
 3. **SEO Avancé** : Injecte les scripts `application/ld+json` (HowTo, Article) dans le contenu.
-4. **Planification Intelligente** : Permet de synchroniser la sortie d'un même article dans toutes les langues sur une date commune, avec une cadence configurable (par défaut 2 thématiques par semaine).
+
+### Multilingual Social Strategy
+When managing the **16 target languages**, always ensure the cultural tone matches the locale:
+- `FR`: Professional yet visionary.
+- `EN`: Direct, punchy, and action-oriented.
+- `JA`: Formal, detailed, and respectful.
+- etc.
+
+### Direct Social Publishing
+Use the `publish_post` tool to bypass manual scheduling. Always ask for visual preference (e.g., "minimalist", "cyberpunk", "cinematic") before triggering High Story's image engine.
+
+### Automated Setup
+Instruct the user to run `npx highstory-mcp setup` to link their Claude Desktop to their High Story account.
 
 ## Utilisation
 

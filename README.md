@@ -1,18 +1,27 @@
-# HighStory Blog Automation Skill 🚀
+# High Story Social Media Orchestrator (Skill)
 
-Ce repo contient un **Agent Skill** conçu pour automatiser l'intégration massive d'articles de blog dans le projet HighStory.
+This repository contains an **Agent Skill** for Claude (and other LLM agents) to autonomously manage social media strategies.
 
-## Installation
+## 🚀 Purpose
 
-Pour installer ce skill dans votre agent Claude (Antigravity), lancez simplement :
+Stop copy-pasting posts. This skill gives Claude the strategic framework and tool-set to:
+- Generate platform-optimized content (Instagram, LinkedIn, X).
+- Orchestrate image generation via High Story.
+- **Publish directly** using the High Story MCP bridge.
 
-```bash
-npx skills add [votre-username]/highstory-blog-skill
-```
+## 🛠️ Setup
 
-## Fonctionnalités
+1. **Install the MCP Bridge**:
+   ```bash
+   npx highstory-mcp setup
+   ```
+2. **Configure Claude**:
+   Add this skill to your agent's directory to give it the "Social Media Manager" persona.
 
-- 🌍 **Multilingue** : Support complet de 16 langues avec mapping automatique.
+## 🌐 Multilingual Support
+
+Includes ready-to-use strategies for 16 languages, ensuring brand consistency from Paris to Tokyo.
+automatique.
 - 🎨 **Layout Premium** : Conversion Markdown -> HTML avec styles Callout HighStory.
 - 📅 **Planning Sync** : Publication synchronisée de la même thématique dans toutes les langues.
 - 🔍 **SEO Ready** : Injection automatique de JSON-LD FAQ et Article.

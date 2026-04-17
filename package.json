@@ -1,7 +1,7 @@
 {
-  "name": "highstory-blog-automation",
-  "version": "1.0.0",
-  "description": "Agent skill for HighStory blog content automation.",
+  "name": "highstory-social-manager",
+  "version": "1.1.0",
+  "description": "Agent skill for autonomous social media orchestration and multilingual publishing via High Story MCP.",
   "author": "7figures",
   "license": "MIT",
   "agentSkills": {
