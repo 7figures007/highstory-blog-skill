@@ -11,12 +11,21 @@ Stop copy-pasting posts. This skill gives Claude the strategic framework and too
 
 ## 🛠️ Step-by-Step Installation
 
-### Étape 1 : Récupérer le Skill
-1. Allez sur [https://github.com/7figures007/highstory-social-media-manager](https://github.com/7figures007/highstory-social-media-manager).
-2. Cliquez sur le bouton vert **Code** puis sur **Download ZIP** (ou utilisez `git clone` si vous connaissez).
-3. Décompressez le fichier et placez le dossier `highstory-social-media-manager` dans votre dossier habituel pour les skills Claude.
+### Étape 1 : Donner "le cerveau" à Claude (Les neurones)
 
-### Étape 2 : Configurer le Bridge (La Connexion)
+Claude a besoin de lire les instructions professionnelles (`SKILL.md`) pour savoir comment agir.
+
+*   **Option A : Claude sur le Web (Version Pro / Projets)**
+    1.  Allez sur [Claude.ai](https://claude.ai) et créez un **Projet** (Bouton "Projects" dans la barre latérale).
+    2.  Dans votre projet, cliquez sur **Add Content** puis **Upload Files**.
+    3.  Sélectionnez le fichier `SKILL.md` contenu dans ce dossier.
+    4.  C'est fini ! Claude possède désormais ses compétences de Manager RS.
+
+*   **Option B : Claude Desktop / Installation Locale**
+    1.  Déplacez ce dossier `highstory-social-media-manager` dans votre dossier **Documents**.
+    2.  Dans votre chat Claude, dites-lui simplement : *"Lis et utilise les instructions dans le fichier SKILL.md de mon dossier Documents/highstory-social-media-manager"*.
+
+### Étape 2 : Configurer le Bridge (La Connexion Technique)
 1. Ouvrez votre terminal (Terminal sur Mac, PowerShell sur Windows).
 2. Tapez la commande suivante et appuyez sur Entrée :
    ```bash
