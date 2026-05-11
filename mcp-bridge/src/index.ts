@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { WebSocketClientTransport } from "@modelcontextprotocol/sdk/client/websocket.js";
+import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import "dotenv/config";
 import { setup } from "./setup.js";
@@ -26,17 +26,11 @@ async function main() {
   }
 
   try {
-    // 1. Prepare WebSocket Connection
-    let wsString = SSE_URL;
-    if (wsString.startsWith('http')) {
-        wsString = wsString.replace(/^http/i, 'ws').replace(/\/mcp\/sse\/?$/, '/mcp/ws');
-    }
-    
-    const url = new URL(wsString);
+    const url = new URL(SSE_URL);
     url.searchParams.set('token', TOKEN);
     
-    console.error(`[High Story] 🔄 Connecting to ${url.origin}...`);
-    const transport = new WebSocketClientTransport(url);
+    console.error(`[High Story] 🔄 Connecting to ${url.origin} (SSE)...`);
+    const transport = new SSEClientTransport(url);
 
     // 2. Setup Stdio Transport for local Agent
     const stdioTransport = new StdioServerTransport();
