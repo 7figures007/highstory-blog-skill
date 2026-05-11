@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
+import { WebSocketClientTransport } from "@modelcontextprotocol/sdk/client/websocket.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import "dotenv/config";
 import { setup } from "./setup.js";
@@ -8,6 +8,17 @@ import { setup } from "./setup.js";
  * HIGHSTORY MCP BRIDGE
  * Connects Local Claude Desktop (Stdio) to Remote High Story Server (WS)
  */
+
+// Patch global WebSocket to ignore subprotocols. 
+// This prevents strict Node.js (undici) clients from crashing with "Server did not respond with sent protocols" 
+// when the Supabase Deno runtime drops or mismanages the Sec-WebSocket-Protocol header.
+const OriginalWebSocket = global.WebSocket;
+global.WebSocket = class extends OriginalWebSocket {
+    constructor(url: string | URL, protocols?: string | string[]) {
+        // Drop the protocols argument entirely
+        super(url);
+    }
+} as any;
 
 async function main() {
   // Check for setup command first
@@ -26,11 +37,21 @@ async function main() {
   }
 
   try {
-    const url = new URL(SSE_URL);
+    // 1. Prepare WebSocket Connection
+    let wsString = SSE_URL;
+    if (wsString.startsWith('http')) {
+        wsString = wsString.replace(/^http/i, 'ws');
+        if (!wsString.includes('/mcp/ws')) {
+            wsString = wsString.replace(/\/+$/, '') + '/mcp/ws';
+        }
+    }
+    
+    const url = new URL(wsString);
     url.searchParams.set('token', TOKEN);
     
-    console.error(`[High Story] 🔄 Connecting to ${url.origin} (SSE)...`);
-    const transport = new SSEClientTransport(url);
+    console.error(`[High Story] 🔄 Connecting to ${url.origin} (WS)...`);
+    // Pass the 'mcp' protocol which is required by the server upgrade
+    const transport = new WebSocketClientTransport(url);
 
     // 2. Setup Stdio Transport for local Agent
     const stdioTransport = new StdioServerTransport();
