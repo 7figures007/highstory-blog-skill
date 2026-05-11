@@ -12,7 +12,6 @@ This skill transforms Claude into an autonomous Social Media Orchestrator using 
 Connects Claude to the **High Story MCP Server** to enable:
 - **execute_campaign**: Transform high-level briefs into full cross-platform strategies (Images or **Video Reels/TikToks**).
 - **generate_authority_article**: Create deep 2000+ word SEO/GEO articles for authority building.
-- **generate_blog_content**: Create standard blog posts and articles for regular content updates.
 - **list_authority_articles**: Monitor generation status and find article IDs.
 - **get_authority_article**: Retrieve the full content of a generated article.
 - **publish_post**: Push visual and text content directly to social networks.
