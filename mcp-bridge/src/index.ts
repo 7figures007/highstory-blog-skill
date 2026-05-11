@@ -56,14 +56,24 @@ async function main() {
     // 2. Setup Stdio Transport for local Agent
     const stdioTransport = new StdioServerTransport();
 
-    // 3. Bidirectional Relay Logic
+    // 3. Bidirectional Relay Logic with Buffer
+    let isCloudReady = false;
+    const messageBuffer: any[] = [];
+
     stdioTransport.onmessage = (message) => {
+        if (!isCloudReady) {
+            console.error(`[High Story Bridge] ⏳ Buffering message from Claude (WS connecting)...`);
+            messageBuffer.push(message);
+            return;
+        }
+        console.error(`[High Story Bridge] ⬆️ Relaying from Claude to Cloud: ${JSON.stringify(message).substring(0, 100)}...`);
         transport.send(message).catch(err => {
             console.error("[High Story] ⚠️ Send failure:", err.message);
         });
     };
 
     transport.onmessage = (message) => {
+        console.error(`[High Story Bridge] ⬇️ Relaying from Cloud to Claude: ${JSON.stringify(message).substring(0, 100)}...`);
         stdioTransport.send(message).catch(err => {
             console.error("[High Story] ⚠️ Receive failure:", err.message);
         });
@@ -79,16 +89,38 @@ async function main() {
         console.error("[High Story] ❌ WebSocket error:", error);
     };
 
-    // 5. Establish Connection
-    await transport.start();
-    console.error("[High Story] ✅ Cloud connection established.");
-    
+    // 5. Establish Connections in the right order!
     await stdioTransport.start();
-    console.error("[High Story] 🟢 MCP Bridge active.");
+    console.error("[High Story] 🟢 MCP Bridge active (listening to Claude).");
+
+    // Then connect to the cloud
+    await transport.start();
+    isCloudReady = true;
+    console.error("[High Story] ✅ Cloud connection established.");
+
+    // 6. Keep-Alive Heartbeat (Prevent Supabase Idle Timeout)
+    const keepAlive = setInterval(() => {
+        if (isCloudReady) {
+            // Sending a simple ping to keep the WebSocket active
+            transport.send({ jsonrpc: "2.0", method: "ping", params: {} }).catch(() => {
+                console.error("[High Story] ⚠️ Heartbeat failed.");
+            });
+        }
+    }, 30000); // Every 30 seconds
+
+    // Flush any buffered messages that Claude sent while we were connecting
+    if (messageBuffer.length > 0) {
+        console.error(`[High Story Bridge] 🚀 Flushing ${messageBuffer.length} buffered messages to Cloud...`);
+        for (const msg of messageBuffer) {
+            transport.send(msg).catch(err => console.error("[High Story] ⚠️ Send failure:", err.message));
+        }
+        messageBuffer.length = 0;
+    }
 
     // Handle Graceful Shutdown
     const shutdown = async () => {
         console.error("\n[High Story] 💤 Shutting down...");
+        clearInterval(keepAlive);
         await transport.close();
         process.exit(0);
     };
