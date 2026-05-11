@@ -19,9 +19,17 @@ export async function setup() {
     try {
         // 1. Token Acquisition
         console.log("👉 Step 1: Authentication");
-        console.log("   Retrieve your permanent API token from:");
-        console.log("   https://app.highstory.ai/settings?tab=api\n");
-        const token = await question("🔑 Enter your HIGHSTORY_TOKEN: ");
+        // Support --key argument for automation
+        const keyArgIndex = process.argv.indexOf('--key');
+        let token = keyArgIndex !== -1 ? process.argv[keyArgIndex + 1] : null;
+        if (!token) {
+            console.log("   Retrieve your permanent API token from:");
+            console.log("   https://app.highstory.ai/settings?tab=api\n");
+            token = await question("🔑 Enter your HIGHSTORY_TOKEN: ");
+        }
+        else {
+            console.log("   🔑 Token provided via argument.");
+        }
         if (!token || token.trim().length < 20) {
             throw new Error("Invalid token. Please provide a valid High Story JWT.");
         }
@@ -64,7 +72,13 @@ export async function setup() {
         const skillDest = path.join(antigravityDir, skillName);
         // Find skill source (the root of this repo if we are in mcp-bridge)
         const __dirname = path.dirname(fileURLToPath(import.meta.url));
-        const skillSource = path.join(__dirname, '..', '..');
+        // In npx/dist, the root is two levels up from dist
+        let skillSource = path.join(__dirname, '..', '..');
+        // Check if we are running in npx (node_modules/highstory-mcp)
+        if (!fs.existsSync(path.join(skillSource, 'SKILL.md'))) {
+            // Fallback for different installation structures
+            skillSource = path.join(__dirname, '..');
+        }
         if (fs.existsSync(skillSource)) {
             console.log(`   Installing skill to: ${skillDest}`);
             if (!fs.existsSync(antigravityDir)) {
