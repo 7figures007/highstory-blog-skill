@@ -4,11 +4,6 @@
   "description": "Agent skill for autonomous social media orchestration and multilingual publishing via High Story MCP.",
   "author": "7figures",
   "license": "MIT",
-  "scripts": {
-    "install-bridge": "cd mcp-bridge && npm install",
-    "build-bridge": "cd mcp-bridge && npm run build",
-    "setup": "npm run install-bridge && npm run build-bridge && node mcp-bridge/dist/index.js setup"
-  },
   "agentSkills": {
     "version": "1.0.0"
   }

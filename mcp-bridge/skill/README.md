@@ -26,21 +26,13 @@ Claude a besoin de lire les instructions professionnelles (`SKILL.md`) pour savo
     2.  Dans votre chat Claude, dites-lui simplement : *"Lis et utilise les instructions dans le fichier SKILL.md de mon dossier Documents/highstory-social-media-manager"*.
 
 ### Étape 2 : Configurer le Bridge (La Connexion Technique)
-
-C'est l'étape la plus importante pour que Claude puisse agir sur vos réseaux sociaux.
-
-**Option A : Installation Rapide (Recommandée)**
-1. Ouvrez votre terminal.
-2. Tapez : `npx highstory-mcp setup`
-3. Suivez les instructions à l'écran.
-
-**Option B : Installation depuis le Repo (Développeurs)**
-1. Dans le dossier cloné, tapez :
+1. Ouvrez votre terminal (Terminal sur Mac, PowerShell sur Windows).
+2. Tapez la commande suivante et appuyez sur Entrée :
    ```bash
-   npm run setup
+   npx highstory-mcp setup
    ```
-2. Collez votre **Clé API permanente High Story** quand cela est demandé.
-3. Redémarrez complètement votre application Claude Desktop.
+3. Collez votre **Clé API permanente High Story** (que vous trouverez dans vos réglages High Story) quand cela est demandé.
+4. Redémarrez complètement votre application Claude Desktop.
 
 ### Étape 3 : Utiliser Claude comme Manager RS
 Demandez simplement à Claude :

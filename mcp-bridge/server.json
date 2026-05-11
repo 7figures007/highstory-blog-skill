@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.7figures007/highstory-mcp",
+  "description": "High Story MCP Server - Automate AI content campaigns and social media management.",
+  "repository": {
+    "url": "https://github.com/7figures007/servers",
+    "source": "github",
+    "subfolder": "src/highstory"
+  },
+  "version": "1.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "highstory-mcp",
+      "version": "1.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "HIGHSTORY_SSE_URL",
+          "description": "The URL of your Supabase Edge Function",
+          "isRequired": true,
+          "format": "string"
+        },
+        {
+          "name": "HIGHSTORY_TOKEN",
+          "description": "Your Supabase JWT access token",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "io.github.petpicksco/highstory-mcp",
+  "description": "High Story MCP Server - Automate AI content campaigns and social media management.",
+  "repository": "https://github.com/petpicksco/soloca-content-flow",
+  "keywords": [
+    "social-media",
+    "ai-agents",
+    "content-marketing",
+    "supabase"
+  ],
+  "license": "MIT",
+  "runtime": "node",
+  "install": "npm install -g highstory-mcp",
+  "env": [
+    "HIGHSTORY_TOKEN",
+    "HIGHSTORY_SSE_URL"
+  ],
+  "contact": "https://github.com/7figures007"
+}
