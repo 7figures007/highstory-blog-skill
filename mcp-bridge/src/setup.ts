@@ -25,17 +25,14 @@ export async function setup() {
     // 1. Token Acquisition
     console.log("👉 Step 1: Authentication");
     console.log("   Retrieve your permanent API token from:");
-    console.log("   https://app.highstory.io/settings/api\n");
+    console.log("   https://app.highstory.ai/settings?tab=api\n");
 
     const token = await question("🔑 Enter your HIGHSTORY_TOKEN: ");
     if (!token || token.trim().length < 20) {
       throw new Error("Invalid token. Please provide a valid High Story JWT.");
     }
 
-    // 2. Server Configuration
-    console.log("\n👉 Step 2: MCP Configuration");
-    const defaultSseUrl = "https://jeprtikkylotvcddrqvm.supabase.co/functions/v1/highstory-mcp-server";
-    const sseUrl = await question(`🌐 Enter Server URL (default: ${defaultSseUrl}): `) || defaultSseUrl;
+    const sseUrl = "https://jeprtikkylotvcddrqvm.supabase.co/functions/v1/highstory-mcp-server";
 
     const isMac = process.platform === 'darwin';
     const configPath = isMac 

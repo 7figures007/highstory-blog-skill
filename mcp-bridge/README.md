@@ -41,7 +41,7 @@ node . setup
 ## 🛡️ Requirements
 
 - **Node.js**: v18.0.0 or higher.
-- **High Story API Token**: Get yours at [app.highstory.io/settings/api](https://app.highstory.io/settings/api).
+- **High Story API Token**: Get yours at [app.highstory.ai/settings?tab=api](https://app.highstory.ai/settings?tab=api).
 
 ## 📄 License
 

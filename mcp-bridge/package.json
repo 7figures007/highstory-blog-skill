@@ -1,6 +1,6 @@
 {
   "name": "highstory-mcp",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Local bridge for High Story MCP Cloud server",
   "main": "dist/index.js",
   "bin": {
